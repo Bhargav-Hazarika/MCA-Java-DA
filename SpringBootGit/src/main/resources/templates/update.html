@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Update Record</title>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Update Record</h1>
+
+<form th:action="@{/update/{id}(id=${item.id})}" method="post">
+
+<div class="form-group">
+<label for="city">City:</label>
+<input type="text" id="city" name="city" th:value="${item.city}" required>
+</div>
+
+
+<!-- Checkbox Row -->
+
+<div class="checkbox-row">
+
+<div class="checkbox-item">
+<label for="room_private">Private Room</label>
+<input type="checkbox" id="room_private" name="room_private"
+th:checked="${item.room_private == 1}">
+</div>
+
+<div class="checkbox-item">
+<label for="host_is_superhost">Superhost</label>
+<input type="checkbox" id="host_is_superhost" name="host_is_superhost"
+th:checked="${item.host_is_superhost == 1}">
+</div>
+
+<div class="checkbox-item">
+<label for="biz">Business Property</label>
+<input type="checkbox" id="biz" name="biz"
+th:checked="${item.biz == 1}">
+</div>
+
+<div class="checkbox-item">
+<label for="time_of_week">Weekend</label>
+<input type="checkbox" id="time_of_week" name="time_of_week"
+th:checked="${item.time_of_week == 1}">
+</div>
+
+</div>
+
+
+<div class="form-group">
+<label for="realSum">Real Sum (€):</label>
+<input type="text" id="realSum" name="realSum"
+th:value="${item.realSum}"
+pattern="^\d+(\.\d{1,2})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="person_capacity">Person Capacity:</label>
+<input type="text" id="person_capacity" name="person_capacity"
+th:value="${item.person_capacity}"
+pattern="^\d+(\.\d{1,2})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="cleanliness_rating">Cleanliness Rating:</label>
+<input type="text" id="cleanliness_rating" name="cleanliness_rating"
+th:value="${item.cleanliness_rating}"
+pattern="^\d+(\.\d{1,2})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="guest_satisfaction_overall">Guest Satisfaction Overall:</label>
+<input type="text" id="guest_satisfaction_overall"
+name="guest_satisfaction_overall"
+th:value="${item.guest_satisfaction_overall}"
+pattern="^\d+(\.\d{1,2})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="bedrooms">Bedrooms:</label>
+<input type="text" id="bedrooms" name="bedrooms"
+th:value="${item.bedrooms}"
+pattern="^\d+(\.\d{1,2})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="dist">Distance to Center (km):</label>
+<input type="text" id="dist" name="dist"
+th:value="${item.dist}"
+pattern="^\d+(\.\d{1,2})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="metro_dist">Metro Distance (km):</label>
+<input type="text" id="metro_dist" name="metro_dist"
+th:value="${item.metro_dist}"
+pattern="^\d+(\.\d{1,2})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="attr_index_norm">Attraction Index:</label>
+<input type="text" id="attr_index_norm" name="attr_index_norm"
+th:value="${item.attr_index_norm}"
+pattern="^\d+(\.\d{1,2})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="rest_index_norm">Restaurant Index:</label>
+<input type="text" id="rest_index_norm" name="rest_index_norm"
+th:value="${item.rest_index_norm}"
+pattern="^\d+(\.\d{1,2})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="lng">Longitude:</label>
+<input type="text" id="lng" name="lng"
+th:value="${item.lng}"
+pattern="^-?\d+(\.\d{1,4})?$" required>
+</div>
+
+
+<div class="form-group">
+<label for="lat">Latitude:</label>
+<input type="text" id="lat" name="lat"
+th:value="${item.lat}"
+pattern="^-?\d+(\.\d{1,4})?$" required>
+</div>
+
+
+<div class="button-container">
+
+<button type="submit" class="update-btn">
+Update Record
+</button>
+
+<a th:href="@{/}" class="button-link">
+Cancel
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>
