@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package com.property.property_backend.controller;
 
 import com.property.property_backend.service.PropertyService;
@@ -110,6 +109,38 @@ public class PageController {
 
         propertyService.updateProperty(id, updates);
 
+        return "redirect:/";
+    }
+    
+    @GetMapping("/insert")
+    public String insertPage() {
+        return "insert"; // Returns insert.html
+    }
+
+    @PostMapping("/insert")
+    public String insertProperty(@RequestParam Map<String, String> params) {
+        Property property = new Property();
+
+        property.setCity(params.get("city"));
+        property.setRealSum(Double.parseDouble(params.get("realSum")));
+        property.setPerson_capacity(Double.parseDouble(params.get("person_capacity")));
+        property.setCleanliness_rating(Double.parseDouble(params.get("cleanliness_rating")));
+        property.setGuest_satisfaction_overall(Double.parseDouble(params.get("guest_satisfaction_overall")));
+        property.setBedrooms(Integer.parseInt(params.get("bedrooms")));
+        property.setDist(Double.parseDouble(params.get("dist")));
+        property.setMetro_dist(Double.parseDouble(params.get("metro_dist")));
+        property.setAttr_index_norm(Double.parseDouble(params.get("attr_index_norm")));
+        property.setRest_index_norm(Double.parseDouble(params.get("rest_index_norm")));
+        property.setLng(Double.parseDouble(params.get("lng")));
+        property.setLat(Double.parseDouble(params.get("lat")));
+
+        property.setRoom_private(params.containsKey("room_private") ? 1 : 0);
+        property.setHost_is_superhost(params.containsKey("host_is_superhost") ? 1 : 0);
+        property.setBiz(params.containsKey("biz") ? 1 : 0);
+        property.setTime_of_week(params.containsKey("time_of_week") ? 1 : 0);
+        property.setMulti(0); // not in insert form, default to 0
+
+        propertyRepository.addProperty(property);
         return "redirect:/";
     }
 }
