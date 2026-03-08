@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Record — Java DA</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="form-page-body">
+
+    <div style="max-width:660px; margin:0 auto; padding:0 20px;">
+        <a th:href="@{/}" class="back-link">← Back to Records</a>
+    </div>
+
+    <div class="container">
+
+        <div class="form-header">
+            <h1>Insert Record</h1>
+            <p>Add a new Airbnb listing to the dataset</p>
+        </div>
+
+        <div class="form-body">
+            <form th:action="@{/insert}" method="POST">
+
+                <!-- Location -->
+                <div class="form-section-title">Location</div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="e.g. Amsterdam" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lng">Longitude</label>
+                        <input type="text" id="lng" name="lng" placeholder="e.g. 12.3456" pattern="^-?\d+(\.\d{1,4})?$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lat">Latitude</label>
+                        <input type="text" id="lat" name="lat" placeholder="e.g. 45.6789" pattern="^-?\d+(\.\d{1,4})?$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dist">Distance to Center (km)</label>
+                        <input type="text" id="dist" name="dist" placeholder="e.g. 3.25" pattern="^\d+(\.\d{1,2})?$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="metro_dist">Metro Distance (km)</label>
+                        <input type="text" id="metro_dist" name="metro_dist" placeholder="e.g. 0.85" pattern="^\d+(\.\d{1,2})?$" required>
+                    </div>
+                </div>
+
+                <!-- Property Details -->
+                <div class="form-section-title">Property Details</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="bedrooms">Bedrooms</label>
+                        <input type="text" id="bedrooms" name="bedrooms" placeholder="e.g. 2" pattern="^\d+(\.\d{1,2})?$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="person_capacity">Person Capacity</label>
+                        <input type="text" id="person_capacity" name="person_capacity" placeholder="e.g. 4" pattern="^\d+(\.\d{1,2})?$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="realSum">Price (€)</label>
+                        <input type="text" id="realSum" name="realSum" placeholder="e.g. 120.50" pattern="^\d+(\.\d{1,2})?$" required>
+                    </div>
+                </div>
+
+                <!-- Flags -->
+                <div class="form-section-title">Flags</div>
+                <div class="checkbox-row">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="room_private" name="room_private">
+                        <label for="room_private">Private Room</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="host_is_superhost" name="host_is_superhost">
+                        <label for="host_is_superhost">Superhost</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="biz" name="biz">
+                        <label for="biz">Business</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="time_of_week" name="time_of_week">
+                        <label for="time_of_week">Weekend</label>
+                    </div>
+                </div>
+
+                <!-- Ratings & Indices -->
+                <div class="form-section-title">Ratings &amp; Indices</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="cleanliness_rating">Cleanliness Rating</label>
+                        <input type="text" id="cleanliness_rating" name="cleanliness_rating" placeholder="e.g. 8.75" pattern="^\d+(\.\d{1,2})?$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guest_satisfaction_overall">Guest Satisfaction</label>
+                        <input type="text" id="guest_satisfaction_overall" name="guest_satisfaction_overall" placeholder="e.g. 95.00" pattern="^\d+(\.\d{1,2})?$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="attr_index_norm">Attraction Index</label>
+                        <input type="text" id="attr_index_norm" name="attr_index_norm" placeholder="e.g. 4.55" pattern="^\d+(\.\d{1,2})?$" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rest_index_norm">Restaurant Index</label>
+                        <input type="text" id="rest_index_norm" name="rest_index_norm" placeholder="e.g. 6.75" pattern="^\d+(\.\d{1,2})?$" required>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="button-container">
+                    <button type="submit" class="btn btn-green">✓ Insert Record</button>
+                    <a th:href="@{/}" class="button-link">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
