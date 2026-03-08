@@ -1,131 +1,140 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>DBMS DSA DA</title>
-
-<link rel="stylesheet" th:href="@{/style.css}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java DA — Airbnb Data</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 
 <body>
 
-    <h1>JAVA</h1>
-    <h3>Digital Assignment</h3>
-
-    <table>
-
-    <tr>
-    <th>Delete</th>
-    <th>City</th>
-    <th>Bedrooms</th>
-    <th>Capacity</th>
-    <th>Room Private</th>
-    <th>Superhost</th>
-    <th>Multi</th>
-    <th>Biz</th>
-    <th>Guest Satisfaction</th>
-    <th>Cleanliness Rating</th>
-    <th>Distance (km)</th>
-    <th>Metro Dist (km)</th>
-    <th>Attraction Index</th>
-    <th>Restaurant Index</th>
-    <th>Time of Week</th>
-    <th>Price (€)</th>
-    <th>Update</th>
-    </tr>
-
-    <tr th:each="item : ${items}">
-
-    <!-- DELETE -->
-    <td>
-    <form th:action="@{/delete/{id}(id=${item.id})}" method="post"
-      onsubmit="return confirm('Are you sure you want to delete this record?');">
-
-        <button type="submit" class="table-btn delete-btn">X</button>
-
-    </form>
-    </td>
-
-    <td th:text="${item.city}"></td>
-    <td th:text="${item.bedrooms}"></td>
-    <td th:text="${item.person_capacity}"></td>
-
-    <td th:text="${item.room_private == 1 ? 'Yes' : 'No'}"></td>
-    <td th:text="${item.host_is_superhost == 1 ? 'Yes' : 'No'}"></td>
-    <td th:text="${item.multi == 1 ? 'Yes' : 'No'}"></td>
-    <td th:text="${item.biz == 1 ? 'Yes' : 'No'}"></td>
-
-    <td th:text="${item.guest_satisfaction_overall}"></td>
-    <td th:text="${item.cleanliness_rating}"></td>
-
-    <td th:text="${#numbers.formatDecimal(item.dist,1,2)}"></td>
-    <td th:text="${#numbers.formatDecimal(item.metro_dist,1,2)}"></td>
-    <td th:text="${#numbers.formatDecimal(item.attr_index_norm,1,2)}"></td>
-    <td th:text="${#numbers.formatDecimal(item.rest_index_norm,1,2)}"></td>
-
-    <td th:text="${item.time_of_week == 1 ? 'Weekend' : 'Weekday'}"></td>
-
-    <td th:text="${#numbers.formatDecimal(item.realSum,1,2)}"></td>
-
-    <!-- UPDATE -->
-    <td>
-
-    <form th:action="@{/update/{id}(id=${item.id})}" method="get">
-
-        <button type="submit" class="table-btn update-btn">
-        🗘
-        </button>
-
-    </form>
-
-    </td>
-
-    </tr>
-
-    </table>
-
-
-    <!-- PAGINATION -->
-
-    <div class="pagination" th:if="${page != null}">
-
-    <a th:if="${page > 1}" th:href="@{/(page=${page-1})}">⬅ Prev</a>
-    <span th:if="${page <= 1}" class="disabled">⬅ Prev</span>
-
-    <span th:text="'Page ' + ${page} + ' of ' + ${totalPages}"></span>
-
-    <a th:if="${page < totalPages}" th:href="@{/(page=${page+1})}">Next ➡</a>
-    <span th:if="${page >= totalPages}" class="disabled">Next ➡</span>
-
+    <!-- ── PAGE HEADER ─────────────────────────────── -->
+    <div class="page-header">
+        <h1>JAVA</h1>
+        <h3>Digital Assignment</h3>
     </div>
 
+    <div class="page-body">
 
-    <!-- QUERY BOX -->
+        <!-- ── DATA TABLE ──────────────────────────── -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Beds</th>
+                        <th>Cap.</th>
+                        <th>Private</th>
+                        <th>Superhost</th>
+                        <th>Multi</th>
+                        <th>Biz</th>
+                        <th>Satisfaction</th>
+                        <th>Cleanliness</th>
+                        <th>Dist (km)</th>
+                        <th>Metro (km)</th>
+                        <th>Attr. Idx</th>
+                        <th>Rest. Idx</th>
+                        <th>Time</th>
+                        <th>Price (€)</th>
+                        <th>Edit</th>
+                        <th>Del</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${items}">
+                        <td th:text="${item.city}"></td>
+                        <td th:text="${item.bedrooms}"></td>
+                        <td th:text="${item.person_capacity}"></td>
 
-    <div class="query-box">
+                        <td th:text="${item.room_private == 1 ? 'Yes' : 'No'}"></td>
+                        <td th:text="${item.host_is_superhost == 1 ? 'Yes' : 'No'}"></td>
+                        <td th:text="${item.multi == 1 ? 'Yes' : 'No'}"></td>
+                        <td th:text="${item.biz == 1 ? 'Yes' : 'No'}"></td>
 
-    <h2>Filter</h2>
+                        <td th:text="${item.guest_satisfaction_overall}"></td>
+                        <td th:text="${item.cleanliness_rating}"></td>
 
-    <form action="/filterPage" method="get">
+                        <td th:text="${#numbers.formatDecimal(item.dist,1,2)}"></td>
+                        <td th:text="${#numbers.formatDecimal(item.metro_dist,1,2)}"></td>
+                        <td th:text="${#numbers.formatDecimal(item.attr_index_norm,1,2)}"></td>
+                        <td th:text="${#numbers.formatDecimal(item.rest_index_norm,1,2)}"></td>
 
-        City:
-        <input type="text" name="city">
+                        <td th:text="${item.time_of_week == 1 ? 'Weekend' : 'Weekday'}"></td>
 
-        Bedrooms:
-        <input type="number" name="bedrooms">
+                        <td th:text="${#numbers.formatDecimal(item.realSum,1,2)}"></td>
 
-        Capacity:
-        <input type="number" name="person_capacity">
+                        <!-- UPDATE -->
+                        <td>
+                            <form th:action="@{/update/{id}(id=${item.id})}" method="get">
+                                <button type="submit" class="table-btn update-btn" title="Edit">✎</button>
+                            </form>
+                        </td>
 
-        Max Price:
-        <input type="number" step="0.1" name="realSum">
+                        <!-- DELETE -->
+                        <td>
+                            <form th:action="@{/delete/{id}(id=${item.id})}" method="post"
+                                  onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                <button type="submit" class="table-btn delete-btn" title="Delete">✕</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        <button type="submit">Filter</button>
+        <!-- ── PAGINATION ───────────────────────────── -->
+        <div class="pagination" th:if="${page != null}">
+            <a th:if="${page > 1}" th:href="@{/(page=${page-1})}">⬅ Prev</a>
+            <span th:if="${page <= 1}" class="disabled">⬅ Prev</span>
 
-    </form>
-    <button><a href="/">Reset</a></button>
+            <span th:text="'Page ' + ${page} + ' of ' + ${totalPages}"></span>
 
+            <a th:if="${page < totalPages}" th:href="@{/(page=${page+1})}">Next ➡</a>
+            <span th:if="${page >= totalPages}" class="disabled">Next ➡</span>
+        </div>
+
+        <!-- ── TOOLBAR: FILTER + INSERT ─────────────── -->
+        <div class="toolbar">
+
+            <!-- Filter Card -->
+            <div class="filter-card">
+                <h2>🔍 Filter Records</h2>
+                <form action="/filterPage" method="get">
+                    <div class="filter-grid">
+                        <div>
+                            <label>City</label>
+                            <input type="text" name="city" placeholder="e.g. Amsterdam">
+                        </div>
+                        <div>
+                            <label>Bedrooms</label>
+                            <input type="number" name="bedrooms" placeholder="e.g. 2">
+                        </div>
+                        <div>
+                            <label>Capacity</label>
+                            <input type="number" name="person_capacity" placeholder="e.g. 4">
+                        </div>
+                        <div>
+                            <label>Max Price (€)</label>
+                            <input type="number" step="0.1" name="realSum" placeholder="e.g. 200">
+                        </div>
+                    </div>
+                    <div class="filter-actions">
+                        <button type="submit" class="btn btn-primary">Apply Filter</button>
+                        <a href="/" class="btn btn-ghost">Reset</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Insert Card -->
+            <div class="action-card">
+                <p>Add a new Airbnb listing<br>to the dataset.</p>
+                <a th:href="@{/insert}">
+                    <button type="button" class="btn btn-green">+ Insert Record</button>
+                </a>
+            </div>
+
+        </div>
     </div>
 
 </body>
