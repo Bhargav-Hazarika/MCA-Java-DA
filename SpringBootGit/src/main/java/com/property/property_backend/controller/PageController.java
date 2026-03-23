@@ -143,4 +143,9 @@ public class PageController {
         propertyRepository.addProperty(property);
         return "redirect:/";
     }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 }
