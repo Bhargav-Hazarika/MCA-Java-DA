@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,14 @@
 </head>
 
 <body>
-
+    <div>
+        <a href="/login">Login</a> |
+        <a href="/logout">Logout</a>
+    </div>
+    
     <!-- ── PAGE HEADER ─────────────────────────────── -->
     <div class="page-header">
-        <h1>JAVA</h1>
-        <h3>Digital Assignment</h3>
+        <h1>PROPERTY LISTINGS</h1>
     </div>
 
     <div class="page-body">
@@ -65,18 +68,33 @@
                         <td th:text="${#numbers.formatDecimal(item.realSum,1,2)}"></td>
 
                         <!-- UPDATE -->
-                        <td>
+<!--                        <td>
                             <form th:action="@{/update/{id}(id=${item.id})}" method="get">
                                 <button type="submit" class="table-btn update-btn" title="Edit">✎</button>
                             </form>
+                        </td>-->
+                        <td sec:authorize="hasRole('ADMIN')">
+
+                            <form th:action="@{/update/{id}(id=${item.id})}" method="get">
+                            <button type="submit" class="table-btn update-btn" title="Edit">🗘</button>
+                            </form>
+
                         </td>
 
                         <!-- DELETE -->
-                        <td>
+<!--                        <td>
                             <form th:action="@{/delete/{id}(id=${item.id})}" method="post"
                                   onsubmit="return confirm('Are you sure you want to delete this record?');">
                                 <button type="submit" class="table-btn delete-btn" title="Delete">✕</button>
                             </form>
+                        </td>-->
+                        
+                        <td sec:authorize="hasRole('ADMIN')">
+
+                            <form th:action="@{/delete/{id}(id=${item.id})}" method="post">
+                            <button type="submit" class="table-btn delete-btn" title="Delete">X</button>
+                            </form>
+
                         </td>
                     </tr>
                 </tbody>
@@ -127,7 +145,7 @@
             </div>
 
             <!-- Insert Card -->
-            <div class="action-card">
+            <div class="action-card" sec:authorize="hasRole('ADMIN')">
                 <p>Add a new Airbnb listing<br>to the dataset.</p>
                 <a th:href="@{/insert}">
                     <button type="button" class="btn btn-green">+ Insert Record</button>
