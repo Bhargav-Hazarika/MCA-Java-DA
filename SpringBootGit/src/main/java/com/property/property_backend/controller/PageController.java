@@ -148,4 +148,9 @@ public class PageController {
     public String login(){
         return "login";
     }
+
+    @GetMapping("/predict")
+    public String showPredictionPage(){
+        return "predict";
+    }
 }
