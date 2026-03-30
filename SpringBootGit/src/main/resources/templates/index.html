@@ -9,8 +9,8 @@
 
 <body>
     <div>
-        <a href="/login">Login</a> |
-        <a href="/logout">Logout</a>
+        <a href="/login" class="btn btn-ghost">Login</a>
+        <a href="/logout" class="btn btn-ghost">Logout</a>
     </div>
     
     <!-- ── PAGE HEADER ─────────────────────────────── -->
@@ -96,6 +96,7 @@
                             </form>
 
                         </td>
+                        
                     </tr>
                 </tbody>
             </table>
@@ -151,7 +152,9 @@
                     <button type="button" class="btn btn-green">+ Insert Record</button>
                 </a>
             </div>
-
+            <div class="action-card">
+                <a th:href="@{/predict}" class="table-btn btn-green">Prediction</a>
+            </div>
         </div>
     </div>
 
