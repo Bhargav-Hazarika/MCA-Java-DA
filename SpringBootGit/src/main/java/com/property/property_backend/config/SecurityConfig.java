@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package com.property.property_backend.config;
 
 import org.springframework.context.annotation.*;
@@ -20,7 +15,7 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/filterPage", "/css/**").permitAll()
+                .requestMatchers("/css/**", "/", "/filterPage","/style.css","/predict.css","/predict").permitAll()
                 .requestMatchers("/delete/**", "/update/**", "/insert/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
